@@ -1,0 +1,6 @@
+INDEX VERSION 1.4+/Users/aming/Documents/workspace-TEST/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+3670862720.index
+3913964407.index
+663795452.index
+1654867297.index
+3017675085.index

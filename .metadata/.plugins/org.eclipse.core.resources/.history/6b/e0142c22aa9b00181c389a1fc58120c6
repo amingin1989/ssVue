@@ -1,0 +1,13 @@
+package ming.spring.web.auth.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+
+public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+	
+	@Autowired
+    private SecurityProperties securityProperties;
+	
+	
+
+}

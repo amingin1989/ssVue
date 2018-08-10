@@ -1,0 +1,29 @@
+package ming.spring.web.dao;
+
+import java.util.List;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import ming.spring.web.bean.UserInfo;
+
+@Repository
+public class UserDAO {
+	private JdbcTemplate jdbcTemplate;
+
+	@Autowired
+	public void setDataSource(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	public List<UserInfo> getUserInfos(String userId) {
+		String sql = "SELECT u.username, u.password, a.role, u.enabled FROM "
+				+ "users u INNER JOIN user_roles a on u.user_id=a.user_id WHERE u.enabled =1 and u.user_id = ?";
+		List<UserInfo> userInfos = jdbcTemplate.query(sql, new Object[] { userId }, new BeanPropertyRowMapper<UserInfo>(UserInfo.class));
+		return userInfos;
+	}
+}

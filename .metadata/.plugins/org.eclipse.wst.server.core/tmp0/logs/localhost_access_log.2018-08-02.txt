@@ -1,0 +1,15 @@
+127.0.0.1 - - [02/Aug/2018:09:52:09 +0800] "GET / HTTP/1.1" 404 1074
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:08 +0800] "GET /ming/ HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:09 +0800] "GET /ming/loginpage HTTP/1.1" 200 1166
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:09 +0800] "GET /ming/resources/bootstrap-3.3.7/js/bootstrap.min.js HTTP/1.1" 200 37045
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:09 +0800] "GET /ming/resources/bootstrap-3.3.7/css/bootstrap.min.css HTTP/1.1" 200 121200
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:09 +0800] "GET /ming/resources/bootstrap-3.3.7/js/jquery-3.3.1.min.js HTTP/1.1" 200 86927
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:09 +0800] "GET /ming/resources/css/login.css HTTP/1.1" 200 348
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:09 +0800] "GET /favicon.ico HTTP/1.1" 404 1085
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:22 +0800] "POST /ming/login HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:22 +0800] "GET /ming/ HTTP/1.1" 200 579
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:22 +0800] "GET /ming/resources/static/css/app.8c750dce52ed1fc01bb1e7e26a96bdcf.css HTTP/1.1" 200 432
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:22 +0800] "GET /ming/resources/static/js/vendor.7fed9fa7b7ba482410b7.js HTTP/1.1" 200 112107
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:22 +0800] "GET /ming/resources/static/js/manifest.2ae2e69a05c33dfc65f8.js HTTP/1.1" 200 857
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:22 +0800] "GET /ming/resources/static/js/app.20d8c4a124fba126aa62.js HTTP/1.1" 200 11604
+0:0:0:0:0:0:0:1 - - [02/Aug/2018:09:53:40 +0800] "GET /ming/functions HTTP/1.1" 200 261

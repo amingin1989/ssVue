@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.springframework.jdbc.datasource.DriverManagerDataSource"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.ViewResolverRegistry"/>
+<fullyQualifiedTypeName name="org.springframework.core.env.Environment"/>
+<fullyQualifiedTypeName name="javax.sql.DataSource"/>
+<fullyQualifiedTypeName name="org.springframework.jdbc.core.RowMapper"/>
+<fullyQualifiedTypeName name="ming.spring.web.bean.UserInfo"/>
+<fullyQualifiedTypeName name="org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity"/>
+<fullyQualifiedTypeName name="org.springframework.util.CollectionUtils"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="org.springframework.cglib.proxy.CallbackGenerator.Context"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan.Filter"/>
+<fullyQualifiedTypeName name="javax.servlet.Filter"/>
+<fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.springframework.security.core.AuthenticationException"/>
+<fullyQualifiedTypeName name="org.springframework.security.web.authentication.AuthenticationFailureHandler"/>
+<fullyQualifiedTypeName name="java.security.Principal"/>
+<fullyQualifiedTypeName name="org.springframework.security.core.userdetails.UserDetails"/>
+</qualifiedTypeNameHistroy>

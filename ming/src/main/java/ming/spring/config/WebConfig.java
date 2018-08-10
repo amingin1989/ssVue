@@ -1,0 +1,68 @@
+package ming.spring.config;
+
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+@Configuration
+@EnableWebMvc
+@ComponentScan("ming.spring.web.*")
+@Import({ WebSecurityConfig.class })
+public class WebConfig implements WebMvcConfigurer {
+
+	private static final Charset UTF8 = Charset.forName("UTF-8");
+	
+	@Bean(name = "dataSource")
+	public DriverManagerDataSource dataSource() {
+		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
+		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/MEMBER?useSSL=false");
+		driverManagerDataSource.setUsername("aming");
+		driverManagerDataSource.setPassword("CasPer19891201");
+		return driverManagerDataSource;
+	}
+
+	@Bean
+	public ViewResolver viewResolver() {
+		InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+		viewResolver.setPrefix("");
+		viewResolver.setSuffix(".html");
+		return viewResolver;
+	}
+
+	@Override
+	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {//設定Response UTF-8 
+		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
+		stringConverter.setSupportedMediaTypes(Arrays.asList(new MediaType("text", "plain", UTF8)));
+		converters.add(stringConverter);
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/*").addResourceLocations("/WEB-INF/html/");
+		// import js
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+	}
+
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/").setViewName("index");
+//		registry.addViewController("/loginpage").setViewName("login");
+	}
+
+}

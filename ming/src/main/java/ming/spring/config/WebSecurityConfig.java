@@ -1,0 +1,82 @@
+package ming.spring.config;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import ming.spring.web.auth.config.AuthenticationService;
+import ming.spring.web.auth.config.CustomizeAuthenticationFailureHandler;
+import ming.spring.web.auth.config.CustomizeAuthenticationSuccessHandler;
+
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+	DataSource dataSource;
+
+	@Autowired
+	AuthenticationService authenticationService;
+	
+	@Autowired
+	CustomizeAuthenticationSuccessHandler successHandler;
+	
+	@Autowired
+	CustomizeAuthenticationFailureHandler failureHandler;
+
+	@Autowired
+	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+		// id:(1)admin password:admin123
+		// id:(2)user password:user123
+		// 一定要用username查詢，否則不會過！
+//		auth.jdbcAuthentication().dataSource(dataSource)
+//				.usersByUsernameQuery("select username, password, enabled from users where username=?")
+//				.authoritiesByUsernameQuery("select username, role from user_roles where username=?")
+//				.passwordEncoder(passwordEncoder());
+
+		// 可以自由驗證身份
+		auth.userDetailsService(authenticationService).passwordEncoder(passwordEncoder());
+	}
+
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("admin123"))
+//				.authorities("ROLE_ADMIN", "ROLE_USER");
+//		auth.inMemoryAuthentication().withUser("user").password(passwordEncoder().encode("user123")).roles("USER");
+//	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers("/resources/**").permitAll()
+				.antMatchers("/user").hasRole("USER")
+				.antMatchers("/admin").hasRole("ADMIN")
+				.anyRequest().authenticated().and()
+				.formLogin().loginPage("/").loginProcessingUrl("/login").usernameParameter("userid")
+				.passwordParameter("password").defaultSuccessUrl("/main", true)
+				.successHandler(successHandler)
+				.failureHandler(failureHandler)
+//				.failureUrl("/?error=true")
+				.permitAll(true).and()
+				.exceptionHandling().accessDeniedPage("/fail").and()
+				.logout().logoutUrl("/logout")
+//				.logoutSuccessUrl("/loginpage")
+				.invalidateHttpSession(true).and()
+				.csrf().disable();
+		// csrf沒有用要關掉，否則無法登入!
+
+		// 一個帳號同時幾個人登入
+		http.sessionManagement().maximumSessions(1).expiredUrl("/");
+	}
+
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+}

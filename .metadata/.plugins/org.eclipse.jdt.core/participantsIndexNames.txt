@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+/Users/aming/Documents/workspace-TEST/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/2415046946.index
+/ming/src/main/java
+/Users/aming/Documents/workspace-TEST/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/243232176.index
+/ming/src/main/java

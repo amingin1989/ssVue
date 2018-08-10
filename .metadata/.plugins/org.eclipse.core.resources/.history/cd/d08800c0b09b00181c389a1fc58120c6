@@ -1,0 +1,5 @@
+package ming.spring.web.auth.config;
+
+public class CustomAuthenticationSuccessHandler {
+
+}

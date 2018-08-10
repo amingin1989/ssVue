@@ -1,0 +1,6 @@
+ming/config/WebSecurityConfig.class
+ming/config/WebConfig.class
+ming/config/SecurityWebApplicationInitializer.class
+ming/web/controller/TEST.class
+ming/web/controller/HelloContoller.class
+ming/config/MvcWebApplicationInitializer.class
