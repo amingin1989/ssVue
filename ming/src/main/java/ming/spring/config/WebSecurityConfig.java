@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import ming.spring.web.auth.config.AuthenticationService;
 import ming.spring.web.auth.config.CustomizeAuthenticationFailureHandler;
 import ming.spring.web.auth.config.CustomizeAuthenticationSuccessHandler;
+import ming.spring.web.auth.config.CustomizeLogoutSuccessHandler;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -25,11 +26,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	AuthenticationService authenticationService;
 	
 	@Autowired
-	CustomizeAuthenticationSuccessHandler successHandler;
+	CustomizeAuthenticationSuccessHandler loginSuccessHandler;
 	
 	@Autowired
-	CustomizeAuthenticationFailureHandler failureHandler;
+	CustomizeAuthenticationFailureHandler loginFailureHandler;
 
+	@Autowired
+	CustomizeLogoutSuccessHandler logoutSuccessHandler;
+	
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 		// id:(1)admin password:admin123
@@ -58,13 +62,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin").hasRole("ADMIN")
 				.anyRequest().authenticated().and()
 				.formLogin().loginPage("/").loginProcessingUrl("/login").usernameParameter("userid")
-				.passwordParameter("password").defaultSuccessUrl("/main", true)
-				.successHandler(successHandler)
-				.failureHandler(failureHandler)
+				.passwordParameter("password").defaultSuccessUrl("/", true)
+				.successHandler(loginSuccessHandler)
+				.failureHandler(loginFailureHandler)
 //				.failureUrl("/?error=true")
 				.permitAll(true).and()
 				.exceptionHandling().accessDeniedPage("/fail").and()
 				.logout().logoutUrl("/logout")
+				.logoutSuccessHandler(logoutSuccessHandler)
 //				.logoutSuccessUrl("/loginpage")
 				.invalidateHttpSession(true).and()
 				.csrf().disable();

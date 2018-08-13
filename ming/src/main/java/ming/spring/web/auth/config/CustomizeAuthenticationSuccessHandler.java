@@ -24,7 +24,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		
+		//要修改使用者的登入狀態
 		UserDetails userInfos = (UserDetails) authentication.getPrincipal();
 
 		JSONArray authoritys = new JSONArray();
@@ -49,9 +49,13 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 					new JSONObject().put("name", "sPage1").put("url", "/s0001")).put(
 							new JSONObject().put("name", "sPage2").put("url", "/s0002")));
 			
+			JSONObject func3 = new JSONObject();
+			func3.put("func_name", "作業類");
+			func2.put("func_data", new JSONArray());
 			
 			functions.put(func1);
 			functions.put(func2);
+			functions.put(func3);
 		}else if(Role.isUser(authorityList)) {
 			
 			JSONObject func2 = new JSONObject();
